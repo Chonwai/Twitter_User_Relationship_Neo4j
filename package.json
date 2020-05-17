@@ -6,7 +6,7 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "prettier": "prettier --write \"*.js\" \"*.ts\"",
-        "server": "tsc && npm run prettier && node index.js",
+        "server": "tsc && npm run prettier && node --max_old_space_size=4096 index.js",
         "compile": "tsc && npm run prettier"
     },
     "author": "Chonwai Un, Edison",
@@ -14,7 +14,11 @@
     "dependencies": {
         "@types/lodash": "^4.14.150",
         "@types/node": "^13.13.5",
-        "lodash": "^4.17.15"
+        "async-csv": "^2.1.3",
+        "csv-writer": "^1.6.0",
+        "csvtojson": "^2.0.10",
+        "lodash": "^4.17.15",
+        "neo4j-driver": "^4.0.2"
     },
     "devDependencies": {
         "typescript": "^3.8.3"

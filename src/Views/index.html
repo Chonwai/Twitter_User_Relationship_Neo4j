@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Neovis.js Simple Example</title>
+        <script src="https://cdn.neo4jlabs.com/neovis.js/v1.4.0/neovis.js"></script>
+        <script src="https://rawgit.com/neo4j-contrib/neovis.js/master/dist/neovis.js"></script>
+        <script type="text/javascript">
+            var viz
+
+            function draw() {
+                var config = {
+                    container_id: 'viz',
+                    server_url: 'bolt://localhost:7687',
+                    server_user: 'neo4j',
+                    server_password: '1234',
+                    labels: {
+                        User: {
+                            caption: 'name',
+                            community: 'community',
+                            size: 'score',
+                            title_properties: ['name', 'community'],
+                        },
+                    },
+                    relationships: {
+                        is_friend: {
+                            thickness: 'weight',
+                        },
+                    },
+                    initial_cypher:
+                        'MATCH p=()-[r:is_friend]->() RETURN p LIMIT 5000',
+                }
+
+                viz = new NeoVis.default(config)
+                viz.render()
+            }
+        </script>
+        <style type="text/css">
+            html,
+            body {
+                width: 100vw;
+                height: 100vh;
+                font: 16pt arial;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            #viz {
+                width: 99%;
+                height: 99%;
+                font: 22pt arial;
+            }
+        </style>
+    </head>
+
+    <body onload="draw()">
+        <div id="viz"></div>
+    </body>
+</html>
